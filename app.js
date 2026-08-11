@@ -22,6 +22,9 @@ const weekGrids = document.querySelectorAll("[data-plan-grid]");
 const dayTemplate = document.querySelector("#dayTemplate");
 const clearCompletionButtons = document.querySelectorAll(".clear-completions");
 const installButton = document.querySelector("#installButton");
+const installModal = document.querySelector("#installModal");
+const installSteps = document.querySelector("#installSteps");
+const closeInstallModal = document.querySelector("#closeInstallModal");
 
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const completionStorageKey = "little-pea-fitness-completions";
@@ -676,15 +679,62 @@ clearCompletionButtons.forEach((button) => {
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
-  installButton.hidden = false;
 });
 
 installButton.addEventListener("click", async () => {
-  if (!deferredInstallPrompt) return;
+  if (!deferredInstallPrompt) {
+    showInstallHelp();
+    return;
+  }
+
   deferredInstallPrompt.prompt();
   await deferredInstallPrompt.userChoice;
   deferredInstallPrompt = null;
-  installButton.hidden = true;
+});
+
+function showInstallHelp() {
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+
+  if (isStandalone) {
+    installSteps.innerHTML = "<p>这个工作台已经像 APP 一样打开了。</p>";
+  } else if (isIOS) {
+    installSteps.innerHTML = `
+      <p>iPhone 需要用 Safari 安装：</p>
+      <ol>
+        <li>用 Safari 打开当前网址。</li>
+        <li>点底部分享按钮。</li>
+        <li>选择“添加到主屏幕”。</li>
+      </ol>
+    `;
+  } else if (isAndroid) {
+    installSteps.innerHTML = `
+      <p>安卓建议用 Chrome 安装：</p>
+      <ol>
+        <li>用 Chrome 打开当前网址。</li>
+        <li>点右上角菜单。</li>
+        <li>选择“安装应用”或“添加到主屏幕”。</li>
+      </ol>
+    `;
+  } else {
+    installSteps.innerHTML = `
+      <p>如果没有弹出安装框，请使用浏览器菜单里的“安装应用”或“添加到主屏幕”。</p>
+    `;
+  }
+
+  installModal.hidden = false;
+}
+
+function hideInstallHelp() {
+  installModal.hidden = true;
+}
+
+closeInstallModal.addEventListener("click", hideInstallHelp);
+installModal.addEventListener("click", (event) => {
+  if (event.target === installModal) hideInstallHelp();
 });
 
 if ("serviceWorker" in navigator) {

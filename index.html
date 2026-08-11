@@ -20,7 +20,7 @@
             <h1>小豌豆工作台</h1>
           </div>
         </div>
-        <button class="install-button" id="installButton" type="button" hidden>安装</button>
+        <button class="install-button" id="installButton" type="button">安装</button>
       </header>
 
       <div class="workspace-layout">
@@ -204,6 +204,16 @@
         <ul class="workout-list"></ul>
       </article>
     </template>
+
+    <div class="install-modal" id="installModal" hidden>
+      <div class="install-card" role="dialog" aria-modal="true" aria-labelledby="installModalTitle">
+        <div class="install-card-header">
+          <h2 id="installModalTitle">安装到手机桌面</h2>
+          <button class="icon-button" id="closeInstallModal" type="button" aria-label="关闭">×</button>
+        </div>
+        <div class="install-steps" id="installSteps"></div>
+      </div>
+    </div>
 
     <script src="./app.js" defer></script>
   </body>

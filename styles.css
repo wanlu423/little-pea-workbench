@@ -129,6 +129,20 @@ h3 {
   padding: 0 18px;
 }
 
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--muted);
+  background: #f4f0e7;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
 .secondary-button {
   padding: 0 16px;
   color: var(--pea-dark);
@@ -583,6 +597,55 @@ h3 {
 
 .workout-item .open-link {
   flex: 0 0 auto;
+}
+
+.install-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(31, 42, 46, 0.34);
+}
+
+.install-modal[hidden] {
+  display: none;
+}
+
+.install-card {
+  width: min(420px, 100%);
+  padding: 18px;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.install-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.install-card h2 {
+  font-size: 1.22rem;
+}
+
+.install-steps {
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.install-steps p,
+.install-steps ol {
+  margin: 0;
+}
+
+.install-steps ol {
+  padding-left: 1.3rem;
 }
 
 @media (max-width: 760px) {

@@ -1,4 +1,4 @@
-const cacheName = "little-pea-workbench-v33";
+const cacheName = "little-pea-workbench-v34";
 const assets = [
   "./",
   "./index.html",

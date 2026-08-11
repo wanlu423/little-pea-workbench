@@ -682,14 +682,17 @@ window.addEventListener("beforeinstallprompt", (event) => {
 });
 
 installButton.addEventListener("click", async () => {
+  showInstallHelp();
+
   if (!deferredInstallPrompt) {
-    showInstallHelp();
     return;
   }
 
-  deferredInstallPrompt.prompt();
-  await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt = null;
+  window.setTimeout(async () => {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+  }, 250);
 });
 
 function showInstallHelp() {
@@ -712,7 +715,7 @@ function showInstallHelp() {
     `;
   } else if (isAndroid) {
     installSteps.innerHTML = `
-      <p>安卓建议用 Chrome 安装：</p>
+      <p>安卓请优先用 Chrome 安装。当前浏览器如果点按钮没有弹窗，就走浏览器菜单：</p>
       <ol>
         <li>用 Chrome 打开当前网址。</li>
         <li>点右上角菜单。</li>

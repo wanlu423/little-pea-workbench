@@ -830,11 +830,9 @@ h3 {
   }
 
   .workout-item strong {
-    overflow: hidden;
     font-size: 0.58rem;
     line-height: 1.25;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .workout-item span,

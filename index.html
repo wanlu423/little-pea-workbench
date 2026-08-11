@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#2f7d57" />
+    <meta name="description" content="小豌豆工作台：热量计算和每周健身计划。" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>小豌豆工作台</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="./assets/icon-192.png" alt="" class="brand-icon" />
+          <div>
+            <p class="eyebrow">Little Pea Desk</p>
+            <h1>小豌豆工作台</h1>
+          </div>
+        </div>
+        <button class="install-button" id="installButton" type="button" hidden>安装</button>
+      </header>
+
+      <div class="workspace-layout">
+        <nav class="tabs" aria-label="工作台目录">
+          <span class="nav-title">目录</span>
+          <button class="tab-button is-active" type="button" data-tab="calorie">热量计算</button>
+          <button class="tab-button" type="button" data-tab="fitness">每周健身（肩背&小腿）</button>
+          <button class="tab-button" type="button" data-tab="coreFitness">每周健身（腰腹&臀腿）</button>
+          <button class="tab-button" type="button" data-tab="rookieFitness">每周健身（菜鸟版）</button>
+        </nav>
+
+        <main>
+          <section class="panel is-active" id="caloriePanel" aria-labelledby="calorieTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Calculator</p>
+              <h2 id="calorieTitle">热量计算</h2>
+            </div>
+            <output class="mini-result" id="levelBadge">等待输入</output>
+          </div>
+
+          <form class="calculator" id="calorieForm">
+            <fieldset class="segmented" aria-label="食物状态">
+              <legend>选择类型</legend>
+              <label>
+                <input type="radio" name="foodType" value="solid" checked />
+                <span>固体</span>
+              </label>
+              <label>
+                <input type="radio" name="foodType" value="liquid" />
+                <span>液体</span>
+              </label>
+            </fieldset>
+
+            <label class="field">
+              <span id="energyLabel">每 100g 热量</span>
+              <div class="input-row">
+                <input id="kjPer100" name="kjPer100" type="number" min="0" step="0.1" inputmode="decimal" placeholder="例如 980" required />
+                <span>千焦</span>
+              </div>
+            </label>
+
+            <label class="field">
+              <span id="amountLabel">总重量</span>
+              <div class="input-row">
+                <input id="grams" name="grams" type="number" min="0" step="0.1" inputmode="decimal" placeholder="例如 165" required />
+                <span id="amountUnit">g</span>
+              </div>
+            </label>
+
+            <button class="primary-button" type="submit">计算</button>
+          </form>
+
+          <div class="result-grid" id="resultGrid" aria-live="polite">
+            <article class="result-card">
+              <span id="perUnitResultLabel">每 100g</span>
+              <strong id="kcalPer100">0</strong>
+              <small>大卡</small>
+            </article>
+            <article class="result-card">
+              <span>一共</span>
+              <strong id="totalKcal">0</strong>
+              <small>大卡</small>
+            </article>
+            <article class="result-card result-card-wide">
+              <span>热量判断</span>
+              <strong id="calorieLevelText">等待输入</strong>
+              <small id="levelSummary">固体按 100g，液体按 100ml 换算</small>
+            </article>
+          </div>
+
+          <section class="standards" aria-labelledby="standardTitle">
+            <h3 id="standardTitle">热量判断标准</h3>
+            <div class="standard-table-wrap">
+              <table class="standard-table">
+                <thead>
+                  <tr>
+                    <th scope="col">等级</th>
+                    <th scope="col">固体</th>
+                    <th scope="col">液体</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><span class="dot low"></span>低热量<br /><small>国标低能量声称</small></th>
+                    <td>≤ 170 千焦 / 100g<br /><small>约 ≤ 40.6 大卡 / 100g</small></td>
+                    <td>≤ 80 千焦 / 100ml<br /><small>约 ≤ 19.1 大卡 / 100ml</small></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><span class="dot medium"></span>中热量<br /><small>非国标</small></th>
+                    <td>&gt; 170 且 &lt; 1046 千焦 / 100g<br /><small>约 &gt; 40.6 且 &lt; 250 大卡 / 100g</small></td>
+                    <td>&gt; 80 且 &lt; 188.3 千焦 / 100ml<br /><small>约 &gt; 19.1 且 &lt; 45 大卡 / 100ml</small></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><span class="dot high"></span>高热量<br /><small>非国标</small></th>
+                    <td>≥ 1046 千焦 / 100g<br /><small>≥ 250 大卡 / 100g</small></td>
+                    <td>≥ 188.3 千焦 / 100ml<br /><small>≥ 45 大卡 / 100ml</small></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="intake-guide" aria-labelledby="intakeGuideTitle">
+            <h3 id="intakeGuideTitle">每日摄入参考</h3>
+            <div class="standard-table-wrap">
+              <table class="standard-table intake-table">
+                <thead>
+                  <tr>
+                    <th scope="col">对象</th>
+                    <th scope="col">基础信息</th>
+                    <th scope="col">健康瘦身建议</th>
+                    <th scope="col">说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">成年女性</th>
+                    <td>身高 159cm<br /><small>体重 108斤（54kg）</small></td>
+                    <td>1300-1400 大卡 / 天<br /><small>约 5440-5860 千焦 / 天</small></td>
+                    <td>按轻活动、温和减脂估算；不建议长期低于 1200 大卡 / 天。</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">成年男性</th>
+                    <td>身高 163cm<br /><small>体重 128斤（64kg）</small></td>
+                    <td>1650-1800 大卡 / 天<br /><small>约 6900-7530 千焦 / 天</small></td>
+                    <td>按轻活动、温和减脂估算；训练日可根据饥饿感和运动量微调。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="guide-note">年龄、日常活动量、疾病、用药、睡眠和目标速度都会影响实际摄入；这里是工作台参考值，不替代医生或营养师建议。</p>
+          </section>
+        </section>
+
+        <section class="panel" id="fitnessPanel" aria-labelledby="fitnessTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Weekly Training</p>
+              <h2 id="fitnessTitle">每周健身（肩背&小腿）</h2>
+            </div>
+            <button class="secondary-button clear-completions" type="button">恢复默认</button>
+          </div>
+
+          <div class="week-grid" data-plan-grid="fitness"></div>
+        </section>
+
+        <section class="panel" id="coreFitnessPanel" aria-labelledby="coreFitnessTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Weekly Training</p>
+              <h2 id="coreFitnessTitle">每周健身（腰腹&臀腿）</h2>
+            </div>
+            <button class="secondary-button clear-completions" type="button">恢复默认</button>
+          </div>
+
+          <div class="week-grid" data-plan-grid="coreFitness"></div>
+        </section>
+
+        <section class="panel" id="rookieFitnessPanel" aria-labelledby="rookieFitnessTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Weekly Training</p>
+              <h2 id="rookieFitnessTitle">每周健身（菜鸟版）</h2>
+            </div>
+            <button class="secondary-button clear-completions" type="button">恢复默认</button>
+          </div>
+
+          <div class="week-grid" data-plan-grid="rookieFitness"></div>
+        </section>
+        </main>
+      </div>
+    </div>
+
+    <template id="dayTemplate">
+      <article class="day-card">
+        <div class="day-header">
+          <h3></h3>
+          <span class="day-total"></span>
+        </div>
+        <ul class="workout-list"></ul>
+      </article>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

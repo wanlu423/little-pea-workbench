@@ -792,13 +792,20 @@ h3 {
   }
 
   .day-header h3 {
-    font-size: 0.98rem;
+    flex: 0 0 auto;
+    font-size: 0.82rem;
+    line-height: 1.1;
+    white-space: nowrap;
   }
 
   .day-total {
+    flex: 1 1 auto;
+    min-width: 0;
     padding: 5px 7px;
-    font-size: 0.68rem;
+    font-size: 0.56rem;
     line-height: 1.2;
+    text-align: right;
+    white-space: normal;
   }
 
   .workout-list {
@@ -807,14 +814,15 @@ h3 {
 
   .workout-item {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      "text text check"
-      "duration link check";
+      "text check"
+      "duration check"
+      "link check";
     align-items: center;
     gap: 6px;
     min-height: 0;
-    padding: 8px;
+    padding: 7px;
   }
 
   .workout-item div {
@@ -822,28 +830,30 @@ h3 {
   }
 
   .workout-item strong {
-    font-size: 0.82rem;
+    font-size: 0.66rem;
     line-height: 1.25;
+    white-space: normal;
   }
 
   .workout-item span,
   .workout-empty {
-    font-size: 0.68rem;
+    font-size: 0.58rem;
   }
 
   .duration-pill {
     grid-area: duration;
     justify-self: start;
     padding: 4px 6px;
-    font-size: 0.68rem;
+    font-size: 0.58rem;
   }
 
   .workout-item .open-link {
     grid-area: link;
     min-width: 62px;
-    min-height: 30px;
+    min-height: 28px;
     padding: 0 8px;
-    font-size: 0.7rem;
+    font-size: 0.62rem;
+    justify-self: start;
   }
 
   .complete-check {
@@ -855,20 +865,6 @@ h3 {
   .complete-check input {
     width: 18px;
     height: 18px;
-  }
-}
-
-@media (max-width: 390px) {
-  .workout-item {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-      "text check"
-      "duration check"
-      "link check";
-  }
-
-  .workout-item .open-link {
-    justify-self: start;
   }
 }
 

@@ -1,5 +1,6 @@
 :root {
   color-scheme: light;
+  --mobile-page-scale: 0.78;
   --bg: #f7f4ec;
   --surface: #fffdf8;
   --ink: #1f2a2e;
@@ -661,10 +662,11 @@ main {
   }
 
   .app-shell {
-    width: 100%;
-    max-width: 100vw;
+    width: calc(100% / var(--mobile-page-scale));
+    max-width: none;
     overflow-x: hidden;
     padding: max(8px, env(safe-area-inset-top)) 8px 14px;
+    zoom: var(--mobile-page-scale);
   }
 
   .workspace-layout {

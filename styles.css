@@ -28,6 +28,7 @@ html {
 body {
   min-height: 100%;
   margin: 0;
+  overflow-x: hidden;
   color: var(--ink);
   font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
@@ -103,6 +104,10 @@ h2 {
 
 h3 {
   margin: 0;
+}
+
+main {
+  min-width: 0;
 }
 
 .install-button,
@@ -651,7 +656,14 @@ h3 {
 }
 
 @media (max-width: 760px) {
+  body {
+    font-size: 13px;
+  }
+
   .app-shell {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
     padding: max(8px, env(safe-area-inset-top)) 8px 14px;
   }
 
@@ -685,7 +697,7 @@ h3 {
 
   .topbar {
     align-items: flex-start;
-    min-height: 58px;
+    min-height: 52px;
     gap: 10px;
   }
 
@@ -705,11 +717,11 @@ h3 {
   }
 
   h1 {
-    font-size: 1.12rem;
+    font-size: 1.04rem;
   }
 
   h2 {
-    font-size: 1.16rem;
+    font-size: 1.08rem;
     line-height: 1.16;
   }
 
@@ -728,6 +740,8 @@ h3 {
   }
 
   .panel {
+    max-width: 100%;
+    overflow: hidden;
     padding: 10px;
     box-shadow: 0 10px 24px rgba(31, 42, 46, 0.08);
   }
@@ -748,31 +762,78 @@ h3 {
   }
 
   .calculator {
-    gap: 12px;
+    gap: 9px;
   }
 
   .segmented span,
   .field input {
-    min-height: 42px;
+    min-height: 36px;
+  }
+
+  .segmented {
+    padding: 4px;
+  }
+
+  .segmented span {
+    font-size: 0.86rem;
+  }
+
+  .field {
+    gap: 5px;
+    font-size: 0.82rem;
+  }
+
+  .input-row,
+  .field input {
+    max-width: 100%;
+  }
+
+  .input-row span {
+    padding: 0 10px;
+    font-size: 0.82rem;
+  }
+
+  .primary-button {
+    min-height: 40px;
+    font-size: 0.92rem;
   }
 
   .result-grid {
     gap: 10px;
-    margin: 14px 0;
+    margin: 12px 0;
   }
 
   .result-card {
-    min-height: 94px;
-    padding: 13px;
+    min-height: 76px;
+    padding: 10px;
+  }
+
+  .result-card strong {
+    margin: 4px 0 2px;
+    font-size: 1.2rem;
   }
 
   .result-card-wide {
-    min-height: 94px;
+    min-height: 76px;
   }
 
   .standards,
   .intake-guide {
-    padding: 12px;
+    padding: 10px;
+  }
+
+  .standard-table-wrap {
+    max-width: 100%;
+  }
+
+  .standard-table th,
+  .standard-table td {
+    padding: 9px 10px;
+    font-size: 0.78rem;
+  }
+
+  .guide-note {
+    font-size: 0.76rem;
   }
 
   .week-grid {

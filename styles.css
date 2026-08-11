@@ -652,12 +652,12 @@ h3 {
 
 @media (max-width: 760px) {
   .app-shell {
-    padding: max(10px, env(safe-area-inset-top)) 10px 18px;
+    padding: max(8px, env(safe-area-inset-top)) 8px 14px;
   }
 
   .workspace-layout {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
   }
 
   .tabs {
@@ -677,9 +677,9 @@ h3 {
   .tab-button {
     flex: 0 0 auto;
     min-width: max-content;
-    min-height: 38px;
-    padding: 0 10px;
-    font-size: 0.86rem;
+    min-height: 34px;
+    padding: 0 9px;
+    font-size: 0.78rem;
     text-align: center;
   }
 
@@ -705,11 +705,11 @@ h3 {
   }
 
   h1 {
-    font-size: 1.28rem;
+    font-size: 1.12rem;
   }
 
   h2 {
-    font-size: 1.34rem;
+    font-size: 1.16rem;
     line-height: 1.16;
   }
 
@@ -728,7 +728,7 @@ h3 {
   }
 
   .panel {
-    padding: 12px;
+    padding: 10px;
     box-shadow: 0 10px 24px rgba(31, 42, 46, 0.08);
   }
 
@@ -777,23 +777,23 @@ h3 {
 
   .week-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 7px;
   }
 
   .day-card {
     min-height: 0;
-    padding: 10px;
+    padding: 8px;
   }
 
   .day-header {
     align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 6px;
+    margin-bottom: 6px;
   }
 
   .day-header h3 {
     flex: 0 0 auto;
-    font-size: 0.82rem;
+    font-size: 0.74rem;
     line-height: 1.1;
     white-space: nowrap;
   }
@@ -801,15 +801,15 @@ h3 {
   .day-total {
     flex: 1 1 auto;
     min-width: 0;
-    padding: 5px 7px;
-    font-size: 0.56rem;
+    padding: 4px 6px;
+    font-size: 0.5rem;
     line-height: 1.2;
     text-align: right;
     white-space: normal;
   }
 
   .workout-list {
-    gap: 6px;
+    gap: 5px;
   }
 
   .workout-item {
@@ -820,9 +820,9 @@ h3 {
       "duration check"
       "link check";
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     min-height: 0;
-    padding: 7px;
+    padding: 6px;
   }
 
   .workout-item div {
@@ -830,41 +830,43 @@ h3 {
   }
 
   .workout-item strong {
-    font-size: 0.66rem;
+    overflow: hidden;
+    font-size: 0.58rem;
     line-height: 1.25;
-    white-space: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .workout-item span,
   .workout-empty {
-    font-size: 0.58rem;
+    font-size: 0.52rem;
   }
 
   .duration-pill {
     grid-area: duration;
     justify-self: start;
-    padding: 4px 6px;
-    font-size: 0.58rem;
+    padding: 3px 5px;
+    font-size: 0.52rem;
   }
 
   .workout-item .open-link {
     grid-area: link;
-    min-width: 62px;
-    min-height: 28px;
-    padding: 0 8px;
-    font-size: 0.62rem;
+    min-width: 54px;
+    min-height: 24px;
+    padding: 0 7px;
+    font-size: 0.54rem;
     justify-self: start;
   }
 
   .complete-check {
     grid-area: check;
-    width: 24px;
-    height: 24px;
+    width: 21px;
+    height: 21px;
   }
 
   .complete-check input {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 }
 

@@ -546,10 +546,6 @@ main {
   background: #f7f4ec;
 }
 
-.workout-item.is-complete {
-  opacity: 0.64;
-}
-
 .workout-item div {
   display: grid;
   gap: 3px;
@@ -563,10 +559,6 @@ main {
   overflow-wrap: anywhere;
 }
 
-.workout-item.is-complete strong {
-  text-decoration: line-through;
-}
-
 .workout-item span,
 .workout-empty {
   color: var(--muted);
@@ -576,21 +568,6 @@ main {
 
 .workout-empty {
   justify-content: center;
-}
-
-.complete-check {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 32px;
-  height: 32px;
-}
-
-.complete-check input {
-  width: 22px;
-  height: 22px;
-  accent-color: var(--pea);
 }
 
 .duration-pill {
@@ -896,9 +873,8 @@ main {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      "text check"
-      "duration check"
-      "link check";
+      "text duration"
+      "text link";
     align-items: center;
     gap: 5px;
     min-height: 0;
@@ -936,16 +912,6 @@ main {
     justify-self: start;
   }
 
-  .complete-check {
-    grid-area: check;
-    width: 21px;
-    height: 21px;
-  }
-
-  .complete-check input {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 @media (max-width: 340px) {

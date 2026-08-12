@@ -20,14 +20,12 @@ const calorieLevelText = document.querySelector("#calorieLevelText");
 const levelSummary = document.querySelector("#levelSummary");
 const weekGrids = document.querySelectorAll("[data-plan-grid]");
 const dayTemplate = document.querySelector("#dayTemplate");
-const clearCompletionButtons = document.querySelectorAll(".clear-completions");
 const installButton = document.querySelector("#installButton");
 const installModal = document.querySelector("#installModal");
 const installSteps = document.querySelector("#installSteps");
 const closeInstallModal = document.querySelector("#closeInstallModal");
 
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
-const completionStorageKey = "little-pea-fitness-completions";
 let deferredInstallPrompt = null;
 
 const weeklyPlan = {
@@ -544,18 +542,6 @@ function calculateCalories() {
   levelSummary.textContent = `按${config.typeLabel}${config.perUnit}标准判断，共 ${formatNumber(amount)}${config.unit}`;
 }
 
-function loadCompletions() {
-  try {
-    return JSON.parse(localStorage.getItem(completionStorageKey)) || {};
-  } catch {
-    return {};
-  }
-}
-
-function saveCompletions(completions) {
-  localStorage.setItem(completionStorageKey, JSON.stringify(completions));
-}
-
 function formatDuration(minutes) {
   if (!minutes) return "0 分钟";
   if (minutes < 60) return `${minutes} 分钟`;
@@ -565,7 +551,6 @@ function formatDuration(minutes) {
 }
 
 function renderWeek(grid, planGroup) {
-  const completions = loadCompletions();
   grid.innerHTML = "";
 
   days.forEach((day) => {
@@ -589,19 +574,11 @@ function renderWeek(grid, planGroup) {
       plan.forEach((item) => {
         const listItem = document.createElement("li");
         listItem.className = "workout-item";
-        const checkboxLabel = document.createElement("label");
-        const checkbox = document.createElement("input");
 
         const textWrap = document.createElement("div");
         const itemTitle = document.createElement("strong");
         const itemDetail = document.createElement("span");
         const duration = document.createElement("span");
-
-        checkboxLabel.className = "complete-check";
-        checkbox.type = "checkbox";
-        checkbox.checked = !!completions[item.id];
-        checkbox.setAttribute("aria-label", `${item.title}完成`);
-        checkboxLabel.appendChild(checkbox);
 
         itemTitle.textContent = item.title;
         itemDetail.textContent = item.detail || "训练";
@@ -609,19 +586,6 @@ function renderWeek(grid, planGroup) {
         duration.textContent = formatDuration(item.durationMinutes || 0);
         textWrap.append(itemTitle, itemDetail);
         listItem.append(textWrap, duration);
-        listItem.classList.toggle("is-complete", checkbox.checked);
-
-        checkbox.addEventListener("change", () => {
-          const currentCompletions = loadCompletions();
-          if (checkbox.checked) {
-            currentCompletions[item.id] = true;
-          } else {
-            delete currentCompletions[item.id];
-          }
-
-          saveCompletions(currentCompletions);
-          listItem.classList.toggle("is-complete", checkbox.checked);
-        });
 
         if (item.url) {
           const link = document.createElement("a");
@@ -633,7 +597,6 @@ function renderWeek(grid, planGroup) {
           listItem.appendChild(link);
         }
 
-        listItem.appendChild(checkboxLabel);
         list.appendChild(listItem);
       });
     }
@@ -667,13 +630,6 @@ calorieForm.addEventListener("submit", (event) => {
 [kjPer100Input, gramsInput, ...calorieForm.querySelectorAll("input[name='foodType']")].forEach((input) => {
   input.addEventListener("input", calculateCalories);
   input.addEventListener("change", calculateCalories);
-});
-
-clearCompletionButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    localStorage.removeItem(completionStorageKey);
-    renderAllWeeks();
-  });
 });
 
 window.addEventListener("beforeinstallprompt", (event) => {

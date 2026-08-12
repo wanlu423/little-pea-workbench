@@ -234,6 +234,13 @@ const rookiePlan = {
       url: "https://www.bilibili.com/video/BV1XdrHBSEAM/?spm_id_from=333.1387.favlist.content.click&vd_source=3ef17c36a7406ce0d3ae8a2960e185bb",
     },
     {
+      id: "rookie-wednesday-hourglass-waist",
+      title: "沙漏腰3.0",
+      detail: "B 站",
+      durationMinutes: 30,
+      url: "https://www.bilibili.com/video/BV13DJVzsEkK/?spm_id_from=333.1387.favlist.content.click&vd_source=3ef17c36a7406ce0d3ae8a2960e185bb",
+    },
+    {
       id: "rookie-wednesday-pelvis-correction",
       title: "骨盆矫正",
       detail: "B 站",
@@ -277,6 +284,13 @@ const rookiePlan = {
       detail: "B 站",
       durationMinutes: 4,
       url: "https://www.bilibili.com/video/BV1XdrHBSEAM/?spm_id_from=333.1387.favlist.content.click&vd_source=3ef17c36a7406ce0d3ae8a2960e185bb",
+    },
+    {
+      id: "rookie-friday-hourglass-waist",
+      title: "沙漏腰3.0",
+      detail: "B 站",
+      durationMinutes: 30,
+      url: "https://www.bilibili.com/video/BV13DJVzsEkK/?spm_id_from=333.1387.favlist.content.click&vd_source=3ef17c36a7406ce0d3ae8a2960e185bb",
     },
     {
       id: "rookie-friday-pelvis-correction",
